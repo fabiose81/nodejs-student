@@ -1,0 +1,32 @@
+.div-dashboard-left {
+    float: left;
+    width : 45%;
+    margin-left: 3%;
+    margin-top: 5%;
+}
+
+.div-dashboard-right {
+    float: right;
+    width : 45%;
+    margin-right: 3%;
+    margin-top: 5%;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.panel-form{
+    margin-top: 10%;
+    margin-left: 3%;
+    width : 45%;
+}
+
+
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
+}

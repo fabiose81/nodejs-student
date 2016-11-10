@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <% include ../template/head %>
+
+    <body>
+        <% include ../template/navbar %>
+   
+        <form action="/student-add" method="POST">
+             <div class="panel panel-default panel-form">
+                <div class="panel-body">
+                   <% if(studentController != undefined){ 
+                            if(studentController.add != undefined && studentController.add.status == 200)
+                            {%>
+                                <div class="alert alert-dismissible alert-success" role="alert">
+                                    Success!!
+                                </div>
+                            <%}
+                            if(studentController.add != undefined && studentController.add.status == 500)
+                            {%>
+                                <div class="alert alert-dismissible alert-danger">
+                                      <%=studentController.add.message%>
+                                </div>
+                            <%}
+                      }%>
+                    <div class="form-group">
+                        <input class="form-control" id="focusedInputName" type="text" name="name" placeholder="Student name">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <div class="panel-body">
+            <%if(studentController != undefined){ 
+                if(studentController.getAll != undefined && studentController.getAll.status == 200){%>
+                <table class="table table-bordered">
+                        <%studentController.getAll.message.forEach(function(student){%>
+                            <tr>
+                                <td><a href="/student-detail/<%=student.id%>/<%=student.name%>"><%=student.name %></a></td>
+                                <td><a href="/student-remove/<%=student.id%>" class="btn btn-danger">Remove</a></td>
+                            </tr>
+                        <%});%>
+                    </table>  
+                <%}
+            }%>
+        </div>     
+    </body>
+</html>

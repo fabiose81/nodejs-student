@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<% include ../template/head %>
+
+<body>
+<% include ../template/navbar %>
+
+   <div class="panel-body panel-form">
+       <%if(homeController != undefined ){ 
+           if(homeController.status != 200) {%>
+                <div class="alert alert-dismissible alert-danger">
+                    <%=homeController.message%>          
+                </div>    
+         <%}
+          }%>
+   </div>
+   
+    <div class="panel panel-primary div-dashboard-left">
+        <div class="panel-heading">
+            <h3 class="panel-title">Students</h3>
+        </div>
+        <div class="panel-body">
+            <h1 class="text-align-center">
+                  <%if(homeController != undefined){ %>
+                      <%=homeController.message[0].count_student%>
+                  <%}%>
+            </h1>
+        </div>
+    </div>
+
+    <div class="panel panel-primary div-dashboard-right">
+        <div class="panel-heading">
+            <h3 class="panel-title">Subjects</h3>
+        </div>
+        <div class="panel-body">
+            <h1 class="text-align-center">
+               <%if(homeController != undefined){ %>
+                      <%=homeController.message[0].count_subject%>
+               <%}%>    
+            </h1>
+        </div>
+    </div>
+
+</body>
+
+</html>

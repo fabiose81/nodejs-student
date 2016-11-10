@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <% include ../template/head %>
+
+    <body>
+        <% include ../template/navbar %>
+
+        <form action="/subject-add" method="POST"> 
+             <div class="panel panel-default panel-form">
+                <div class="panel-body">
+                   <% if(subjectController != undefined){ 
+                            if(subjectController.add != undefined && subjectController.add.status == 200) 
+                            {%>
+                                <div class="alert alert-dismissible alert-success" role="alert">
+                                    Success!!
+                                </div>
+                            <%}
+                            if(subjectController.add != undefined && subjectController.add.status == 500)
+                            {%>
+                                <div class="alert alert-dismissible alert-danger">
+                                        <%=subjectController.add.message%>
+                                </div>
+                            <%}
+                      }%>
+                    <div class="form-group">
+                        <input class="form-control" id="focusedInputName" type="text" name="name" placeholder="Subject name">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+       <div class="panel-body">
+            <%if(subjectController != undefined){ 
+                if(subjectController.getAll != undefined && subjectController.getAll.status == 200){%>
+                <table class="table table-bordered">
+                        <%subjectController.getAll.message.forEach(function(subject){%>
+                            <tr>
+                                <td><a href="/subject-detail/<%=subject.id%>/<%=subject.name%>"><%=subject.name %></a></td>
+                                <td><a href="/subject-remove/<%=subject.id%>" class="btn btn-danger">Remove</a></td>
+                            </tr>
+                        <%});%>
+                    </table>  
+                <%}
+            }%>
+        </div>  
+    </body>
+</html>

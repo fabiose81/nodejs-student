@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <% include ../template/head %>
+
+    <body>
+        <% include ../template/navbar %>
+
+     <form action="/student-update" method="POST">
+             <div class="panel panel-default panel-form">
+                <div class="panel-body">
+                   <% if(studentController != undefined){ 
+                            if(studentController.update != undefined && studentController.update.status == 200)
+                            {%>
+                                <div class="alert alert-dismissible alert-success" role="alert">
+                                    Updated!!
+                                </div>
+                            <%}
+                            if(studentController.update != undefined && studentController.update.status == 500)
+                            {%>
+                                <div class="alert alert-dismissible alert-danger">
+                                        <%=studentController.upadate.message%>
+                                </div>
+                            <%}
+                      }%>
+                    <div class="form-group">
+                        <input class="form-control" id="focusedInputName" type="text" name="name" value="<%=studentController.update.message.name%>" placeholder="Student name">
+                        <input type="hidden" name="id" value="<%=studentController.update.message.id%>"> 
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+      
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Subjects</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                         <%if(studentController.subjects.message != undefined){
+                            studentController.subjects.message.forEach(function(subject){%>
+                            <tr>
+                                <td>
+                                    <a href="/subject-detail/<%=subject.id_subject%>/<%=subject.name_subject%>">
+                                       <%=subject.name_subject%>
+                                    </a>                                  
+                                 </td>   
+                                <td> 
+                                <%if(subject.subject_associated){%>
+                                 <a href="/student-subject-desassociate/<%=studentController.update.message.id%>/<%=subject.id_subject%>">
+                                     <span class="glyphicon glyphicon-remove red"></span>
+                                 </a>
+                                <%}else{%>
+                                  <a href="/student-subject-associate/<%=studentController.update.message.id%>/<%=subject.id_subject%>">                               
+                                     <span class="glyphicon glyphicon-ok green"></span>
+                                   </a>
+                                <%}%>
+                                </td>                         
+                            </tr>                            
+                            <%});
+                         }%>
+                    </table> 
+                </div>
+            </div>
+        
+    </body>
